@@ -4,6 +4,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "GitHub.copilot"
         "golang.Go"
       ]
     }
