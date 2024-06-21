@@ -9,36 +9,12 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
+
 	mux.HandleFunc("/", indexHandler)
 	mux.HandleFunc("/info", infoHandler)
 	mux.HandleFunc("/photo/", photoHandler)
 
 	http.ListenAndServe(":8080", mux)
-}
-
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("template/index.gohtml")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	f, err := os.ReadFile("photo/info.json")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	inf := []PhotoInfo{}
-	err = json.Unmarshal(f, &inf)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	t.ExecuteTemplate(w, "index.gohtml", inf)
-}
-
-func photoHandler(w http.ResponseWriter, r *http.Request) {
-	h := http.StripPrefix("/photo", http.FileServer(http.Dir("./photo/")))
-	h.ServeHTTP(w, r)
 }
 
 type PhotoInfo struct {
@@ -49,12 +25,13 @@ type PhotoInfo struct {
 	Camera   string `json:"camera"`
 }
 
-func infoHandler(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("template/info.gohtml")
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("template/index.gohtml")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
 	f, err := os.ReadFile("photo/info.json")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -66,5 +43,33 @@ func infoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	t.ExecuteTemplate(w, "info.gohtml", inf)
+
+	t.Execute(w, inf)
+}
+
+func infoHandler(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("template/info.gohtml")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	f, err := os.ReadFile("photo/info.json")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	inf := []PhotoInfo{}
+	err = json.Unmarshal(f, &inf)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	t.Execute(w, inf)
+}
+
+func photoHandler(w http.ResponseWriter, r *http.Request) {
+	h := http.StripPrefix("/photo", http.FileServer(http.Dir("./photo/")))
+	h.ServeHTTP(w, r)
 }
