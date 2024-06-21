@@ -4,19 +4,21 @@
     <title>Photo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
-<body>
-    <h1>Photo</h1>
+<body class="body">
+    <h1 class="h1">Photo</h1>
     <p>Photos shot by Konstantin Koetzner.</p>
-    <nav>
-        <ul>
+    <nav class="nav">
+        <ul class="nav__ul">
             <li><a href="/">Index</a></li>
             <li><a href="/info">Index with photo info</a></li>
         </ul>
     </nav>
-    <h2>Index</h2>
+    <h2 class="h2">Index</h2>
     {{range .}}
-    <a href="/photo/{{.Number}}.jpg">{{.Number}}</a> {{.Location}}, {{.Season}} {{.Year}}, {{.Camera}}<br>
+    <a href="/photo/{{.Number}}.jpg">{{.Number}}</a>, {{.Location}}, {{.Season}} {{.Year}}, {{.Camera}}<br>
     {{end}}
+    <p>number, location, time, camera</p>
 </body>
 </html>

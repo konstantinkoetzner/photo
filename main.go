@@ -13,6 +13,7 @@ func main() {
 	mux.HandleFunc("/", indexHandler)
 	mux.HandleFunc("/info", infoHandler)
 	mux.HandleFunc("/photo/", photoHandler)
+	mux.HandleFunc("/css/main.css", cssHandler)
 
 	http.ListenAndServe(":8080", mux)
 }
@@ -72,4 +73,8 @@ func infoHandler(w http.ResponseWriter, r *http.Request) {
 func photoHandler(w http.ResponseWriter, r *http.Request) {
 	h := http.StripPrefix("/photo", http.FileServer(http.Dir("./photo/")))
 	h.ServeHTTP(w, r)
+}
+
+func cssHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./css/main.css")
 }
