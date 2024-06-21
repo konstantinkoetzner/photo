@@ -17,7 +17,7 @@
     </nav>
     <h2 class="h2">Index</h2>
     {{range .}}
-    <a href="/photo/{{.Number}}.jpg">{{.Number}}</a>, {{.Location}}, {{.Season}} {{.Year}}, {{.Camera}}<br>
+    <a href="/photo/{{.Filename}}">{{.Number}}</a>, {{.Location}}, {{.Season}} {{.Year}}, {{.Camera}}<br>
     {{end}}
     <p>number, location, time, camera</p>
 </body>

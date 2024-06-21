@@ -1,6 +1,7 @@
 [
     {
         "number": 1,
+        "filename": "1.jpg",
         "location": "Munich",
         "season": "Spring",
         "year": 2024,
@@ -8,6 +9,7 @@
     },
     {
         "number": 2,
+        "filename": "2.jpg",
         "location": "Munich",
         "season": "Spring",
         "year": 2024,

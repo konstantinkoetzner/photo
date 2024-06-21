@@ -20,6 +20,7 @@ func main() {
 
 type PhotoInfo struct {
 	Number   int    `json:"number"`
+	Filename string `json:"filename"`
 	Location string `json:"location"`
 	Season   string `json:"season"`
 	Year     int    `json:"year"`
