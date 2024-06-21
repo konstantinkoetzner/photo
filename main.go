@@ -27,13 +27,13 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	info := []PhotoInfo{}
-	err = json.Unmarshal(f, &info)
+	inf := []PhotoInfo{}
+	err = json.Unmarshal(f, &inf)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	t.ExecuteTemplate(w, "index.gohtml", info)
+	t.ExecuteTemplate(w, "index.gohtml", inf)
 }
 
 func photoHandler(w http.ResponseWriter, r *http.Request) {
@@ -60,11 +60,11 @@ func infoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	info := []PhotoInfo{}
-	err = json.Unmarshal(f, &info)
+	inf := []PhotoInfo{}
+	err = json.Unmarshal(f, &inf)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	t.ExecuteTemplate(w, "info.gohtml", info)
+	t.ExecuteTemplate(w, "info.gohtml", inf)
 }
