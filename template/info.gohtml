@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Info</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>Photo</h1>
+    <h2>Info</h2>
+    <p>Photos shot by Konstantin Koetzner.</p>
+    {{range .}}
+<a href="/photo/{{.FileName}}">{{.Number}}</a> {{.Location}}, {{.Season}} {{.Year}}, {{.Camera}}
+    {{end}}
+</body>
+</html>
