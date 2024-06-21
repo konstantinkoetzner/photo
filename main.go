@@ -13,8 +13,7 @@ func main() {
 	mux.HandleFunc("/", indexHandler)
 	mux.HandleFunc("/info", infoHandler)
 	mux.HandleFunc("/photo/", photoHandler)
-	mux.HandleFunc("/css/main.css", cssHandler)
-
+	mux.HandleFunc("/css/", cssHandler)
 	http.ListenAndServe(":8080", mux)
 }
 
