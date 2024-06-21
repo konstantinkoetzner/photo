@@ -76,5 +76,6 @@ func photoHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func cssHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./css/main.css")
+	h := http.StripPrefix("/css", http.FileServer(http.Dir("./css/")))
+	h.ServeHTTP(w, r)
 }
