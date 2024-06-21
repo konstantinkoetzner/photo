@@ -7,12 +7,6 @@ import (
 	"os"
 )
 
-var tpl *template.Template
-
-func init() {
-	tpl = template.Must(template.ParseGlob("template/*"))
-}
-
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", indexHandler)
@@ -23,6 +17,11 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("template/index.gohtml")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	f, err := os.ReadFile("photo/info.json")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -34,7 +33,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	tpl.ExecuteTemplate(w, "index.gohtml", info)
+	t.ExecuteTemplate(w, "index.gohtml", info)
 }
 
 func photoHandler(w http.ResponseWriter, r *http.Request) {
@@ -52,6 +51,11 @@ type PhotoInfo struct {
 }
 
 func infoHandler(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("template/info.gohtml")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	f, err := os.ReadFile("photo/info.json")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -63,5 +67,5 @@ func infoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	tpl.ExecuteTemplate(w, "info.gohtml", info)
+	t.ExecuteTemplate(w, "info.gohtml", info)
 }
