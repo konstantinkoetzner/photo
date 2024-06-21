@@ -23,7 +23,18 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	tpl.ExecuteTemplate(w, "index.gohtml", nil)
+	f, err := os.ReadFile("photo/info.json")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	info := []PhotoInfo{}
+	err = json.Unmarshal(f, &info)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	tpl.ExecuteTemplate(w, "index.gohtml", info)
 }
 
 func photoHandler(w http.ResponseWriter, r *http.Request) {

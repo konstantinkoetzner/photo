@@ -15,6 +15,8 @@
         </ul>
     </nav>
     <h2>Index</h2>
-    <a href="/photo/0001.jpg">1</a>
+    {{range .}}
+    <a href="/photo/{{.FileName}}">{{.Number}}</a>
+    {{end}}
 </body>
 </html>
