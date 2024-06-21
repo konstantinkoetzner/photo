@@ -47,7 +47,6 @@ type PhotoInfo struct {
 	Season   string `json:"season"`
 	Year     int    `json:"year"`
 	Camera   string `json:"camera"`
-	FileName string `json:"fileName"`
 }
 
 func infoHandler(w http.ResponseWriter, r *http.Request) {
