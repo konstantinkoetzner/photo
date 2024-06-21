@@ -7,8 +7,14 @@
 </head>
 <body>
     <h1>Photo</h1>
-    <h2>Info</h2>
     <p>Photos shot by Konstantin Koetzner.</p>
+    <nav>
+        <ul>
+            <li><a href="/">Index</a></li>
+            <li><a href="/info">Index with Info</a></li>
+        </ul>
+    </nav>
+    <h2>Index</h2>
     {{range .}}
 <a href="/photo/{{.FileName}}">{{.Number}}</a> {{.Location}}, {{.Season}} {{.Year}}, {{.Camera}}
     {{end}}
