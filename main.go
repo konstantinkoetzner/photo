@@ -27,7 +27,8 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func photoHandler(w http.ResponseWriter, r *http.Request) {
-	http.StripPrefix("/photo", http.FileServer(http.Dir("./photo/")))
+	h := http.StripPrefix("/photo", http.FileServer(http.Dir("./photo/")))
+	h.ServeHTTP(w, r)
 }
 
 type PhotoInfo struct {
