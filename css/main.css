@@ -71,6 +71,10 @@
     font-style: italic;
 }
 
+* {
+    color: inherit;
+}
+
 .body {
     margin-top: 40px;
     margin-bottom: 40px;
@@ -80,10 +84,9 @@
     padding-right: 10px;
     max-width: 40rem;
     line-height: 1.6;
-    font-size: 1rem;
-    color: hsl(0, 0%, 10%);
     font-family: "Roboto", sans-serif;
-  }
+    color: hsl(0, 0%, 10%);
+}
 
 .nav__ul {
     padding-left: 0;
@@ -96,4 +99,11 @@
 
 .h2 {
     line-height: 1.2;
+}
+
+@media (prefers-color-scheme: dark) {
+    .body {
+        background-color: hsl(0, 0%, 10%);
+        color: hsl(0, 0%, 80%);
+    }
 }
